@@ -1,0 +1,46 @@
+<h1>Burger Sorter</h1>
+
+<h2>Burgers Available</h2>
+
+<ul>
+  {{#each burgers}}
+    {{#unless this.eaten}}
+      <li>
+        {{this.name}}  // = if there is a name, run the next bit of code
+
+        <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
+          <input type="hidden" name="eaten" value="true">
+          <button type="submit">Eat the burger!</button>
+        </form>
+      </li>
+    {{/unless}} //like an "else" - then run nothing, or whatever code you wanna put in there...
+  {{/each}}
+</ul>
+
+<h2>Burgers that have been eaten!</h2>
+
+<ul>
+  {{#each burgers}}
+    {{#if this.sleepy}} //if sleepy is true/somthing...then run the following
+      <li>
+        {{this.name}}
+
+        <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
+          <input type="hidden" name="eaten" value="false">
+          <button type="submit">Eat it!</button>
+        </form>
+      </li>
+    {{/if}}
+  {{/each}}
+</ul>
+
+<h2>Add a Burger</h2>
+<form class="create-update-form" action="burgers/create" method="POST">
+
+  <div class="form-group">
+    <label for="ca">Burger Name:</label>
+    <input type="text" id="ca" name="name">
+  </div>
+
+  <button type="submit">Add Burger</button>
+</form>
